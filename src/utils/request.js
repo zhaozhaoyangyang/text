@@ -2,7 +2,7 @@ import axios from "axios";
 // import { api } from "./common";
 import { getToken } from "./auth";
 const instance = axios.create({
-  baseURL: api,
+  baseURL: "/api",
   timeout: 5000,
 });
 
