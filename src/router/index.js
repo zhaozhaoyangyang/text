@@ -26,7 +26,7 @@ const router = new VueRouter({
       path: "/sy",
       component: () => import("../pages/sy"),
       meta:{
-        headerShow:true,
+        headerShow:false,
         footerShow:true
     }
     },
