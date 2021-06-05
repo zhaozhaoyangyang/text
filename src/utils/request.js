@@ -1,8 +1,19 @@
 import axios from "axios";
-// import { api } from "./common";
+<<<<<<< HEAD
+// import { BASE_URL } from "./common";
 import { getToken } from "./auth";
 const instance = axios.create({
   baseURL: '/api',
+=======
+// import { api } from "./common";
+import { getToken } from "./auth";
+const instance = axios.create({
+<<<<<<< HEAD
+  baseURL: '/api',
+=======
+  baseURL: "/api",
+>>>>>>> 2fad2b37055a80952e043eb22c7f5c1bcc7a6a22
+>>>>>>> e2c501b8a659f5af944766cbfc6d716b41d72726
   timeout: 5000,
 });
 
