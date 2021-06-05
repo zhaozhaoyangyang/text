@@ -1,10 +1,8 @@
 <template>
   <div class="">
-    <van-nav-bar title="标题" left-text="返回" left-arrow>
-      <template #right>
-        <van-icon name="search" size="18" />
-      </template>
-    </van-nav-bar>
+
+          <van-search v-model="value" placeholder="请输入搜索关键词" />
+
   </div>
 </template>
 
@@ -12,7 +10,9 @@
 export default {
   components: {},
   data() {
-    return {};
+    return {
+        value: '',
+    };
   },
   computed: {},
   watch: {},
