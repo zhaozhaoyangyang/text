@@ -1,8 +1,6 @@
 <template>
   <div class="">
-
-          <van-search v-model="value" placeholder="请输入搜索关键词" />
-
+    <van-search v-model="value" placeholder="请输入搜索关键词" />
   </div>
 </template>
 
@@ -11,7 +9,7 @@ export default {
   components: {},
   data() {
     return {
-        value: '',
+      value: "",
     };
   },
   computed: {},
