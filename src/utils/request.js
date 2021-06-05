@@ -1,4 +1,10 @@
 import axios from "axios";
+<<<<<<< HEAD
+// import { BASE_URL } from "./common";
+import { getToken } from "./auth";
+const instance = axios.create({
+  baseURL: '/api',
+=======
 // import { api } from "./common";
 import { getToken } from "./auth";
 const instance = axios.create({
