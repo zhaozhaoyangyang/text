@@ -5,7 +5,7 @@
       <van-tabbar-item to='/fl' icon="search">分类</van-tabbar-item>
       <van-tabbar-item to='/play' icon="friends-o">播放</van-tabbar-item>
       <van-tabbar-item to='/radio' icon="setting-o">电台</van-tabbar-item>
-      <van-tabbar-item to='/mine' icon="setting-o">我的</van-tabbar-item>
+      <van-tabbar-item to='/mine' icon="manager">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
