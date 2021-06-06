@@ -58,12 +58,12 @@
           </div>
 
          <!-- 歌手列表 -->
-         <div class="singList">
-             <img src="http://p1.music.126.net/0L5drAV43FLJk6J9dRhfew==/109951165911947840.jpg" alt="">
-             <p>林俊杰</p>
-             <i class="el-icon-user"></i>
+         <div class="sl">
+         <div class="singList" v-for="item in arr" :key="item._id">
+             <img :src="item.img1v1Url" alt="" @click="btn(item._id)">
+             <p>{{item.name}}</p>
          </div>
-
+          </div>
         </div>
       </van-tab>
       <van-tab title="歌单" name="b"> 123456</van-tab>
@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import {getSinger} from '../../api/fl'
+import {getSinger,reqsings} from '../../api/fl'
 export default {
   components: {},
   data() {
@@ -90,6 +90,10 @@ export default {
          const result = await getSinger()
          console.log(result);
          this.arr = result.data.artists
+      },
+     async btn(id){
+        const result = await reqsings(id)
+        console.log(result);
       }
   },
   created() {
@@ -158,7 +162,22 @@ ul {
   float: right;
 }
 .singList  img{
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
+}
+.singList p{
+  font-size: 5px;
+}
+
+.singLisy{
+  margin: 10px;
+}
+.sl{
+  width: 200px;
+  /* background: skyblue; */
+  margin: 0  auto 10px;
+  display: flex;
+  flex-wrap:wrap;
+  justify-content: space-around;
 }
 </style>
