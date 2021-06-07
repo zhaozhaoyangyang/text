@@ -59,8 +59,8 @@
 
          <!-- 歌手列表 -->
          <div class="sl">
-         <div class="singList" v-for="item in arr" :key="item._id">
-             <img :src="item.img1v1Url" alt="" @click="btn(item._id)">
+         <div class="singList" v-for="(item) in arr.slice(0,20)" :key="item.id">
+             <img :src="item.img1v1Url" alt="" @click="btn(item.id)">
              <p>{{item.name}}</p>
          </div>
           </div>
@@ -86,14 +86,19 @@ export default {
   watch: {},
 
   methods: {
+    //歌手列表
      async getsing(){
          const result = await getSinger()
          console.log(result);
          this.arr = result.data.artists
+        //  console.log(this.arr);
       },
+      //歌手单曲
      async btn(id){
+       console.log(id);
         const result = await reqsings(id)
         console.log(result);
+        this.$router.push('/singer')
       }
   },
   created() {
@@ -162,8 +167,8 @@ ul {
   float: right;
 }
 .singList  img{
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
 }
 .singList p{
   font-size: 5px;

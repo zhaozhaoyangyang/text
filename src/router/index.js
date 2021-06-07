@@ -43,6 +43,14 @@ const router = new VueRouter({
     }
     },
     {
+      path:'/singer',
+      component:() =>import('../pages/fl/singer'),
+      meta:{
+        headerShow:false,
+        footerShow:false
+    }
+    },
+    {
       path: "/play",
       component: () => import("../pages/play"),
       meta:{
