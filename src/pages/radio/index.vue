@@ -5,7 +5,7 @@
       <div class="box1">
         <van-grid>
           <section v-for="item in recommendList" :key="item.id">
-            <img :src="item.picUrl" alt="" @click="enter" />
+            <img :src="item.picUrl" alt="" @click="recommendProgram(item.id)" />
             <p>{{ item.rcmdText }}</p>
           </section>
         </van-grid>
@@ -14,25 +14,20 @@
       <div class="box1">
         <van-grid>
           <section v-for="item in hotList" :key="item.id">
-            <img :src="item.picUrl" alt="" @click="enter" />
+            <img :src="item.picUrl" alt="" @click="hotprogram(item.id)" />
             <p>{{ item.rcmdtext }}</p>
           </section>
         </van-grid>
       </div>
-      <!-- <h3>今日优选</h3>
-    <div class="box1">
-      <van-grid>
-        <section v-for="item in todayList" :key="item.id">
-          <img :src="item.picUrl" alt="" @click="enter" />
-          <p>{{ item.rcmdText }}</p>
-        </section>
-      </van-grid>
-    </div> -->
       <h3>24小时节目榜 <van-icon name="arrow" /></h3>
       <div class="box1">
         <van-grid>
           <section v-for="item in programList" :key="item.id">
-            <img :src="item.program.blurCoverUrl" alt="" @click="enter" />
+            <img
+              :src="item.program.blurCoverUrl"
+              alt=""
+              @click="hoursProgram"
+            />
             <p>{{ item.program.description }}</p>
           </section>
         </van-grid>
@@ -41,7 +36,7 @@
       <div class="box1">
         <van-grid>
           <section v-for="item in peopleList" :key="item.id">
-            <img :src="item.avatarUrl" alt="" @click="enter" />
+            <img :src="item.avatarUrl" alt="" @click="hoursProgram()" />
             <p>{{ item.nickName }}</p>
           </section>
         </van-grid>
@@ -50,7 +45,7 @@
       <div class="box1">
         <van-grid>
           <section v-for="item in newpeopleList" :key="item.id">
-            <img :src="item.avatarUrl" alt="" @click="enter" />
+            <img :src="item.avatarUrl" alt="" />
             <p>{{ item.nickName }}</p>
           </section>
         </van-grid>
@@ -59,7 +54,7 @@
       <div class="box1">
         <van-grid>
           <section v-for="item in hotpopularList" :key="item.id">
-            <img :src="item.avatarUrl" alt="" @click="enter" />
+            <img :src="item.avatarUrl" alt="" />
             <p>{{ item.nickName }}</p>
           </section>
         </van-grid>
@@ -76,8 +71,10 @@ import {
   reqPeople,
   reqNewPeople,
   reqHotPopular,
+  reqDetail,
 } from "../../api/dt";
 export default {
+  inject: ["reload"],
   components: {},
   data() {
     return {
@@ -88,6 +85,8 @@ export default {
       newpeopleList: [],
       hotpopularList: [],
       isLoading: false,
+      mainSongList: [],
+      songId: [],
     };
   },
   computed: {},
@@ -96,7 +95,7 @@ export default {
   methods: {
     async recommend() {
       const result = await dtTuijian({ limit: 10 });
-      console.log(result.data.data);
+      // console.log(result.data.data);
       this.recommendList = result.data.data;
     },
     async hot() {
@@ -124,13 +123,48 @@ export default {
       // console.log(result.data.data.list);
       this.hotpopularList = result.data.data.list;
     },
+    // 刷新
     onRefresh() {
       setTimeout(() => {
         // Toast("刷新成功");
+        // location.reload();
+        this.reload();
         this.isLoading = false;
       }, 1000);
     },
-    enter() {},
+    async recommendProgram(id) {
+      const result = await reqDetail({ rid: id });
+      // console.log(result.data.programs);
+      this.mainSongList = result.data.programs;
+      this.songId = [];
+      this.mainSongList.forEach((i) => {
+        // console.log(i.mainSong.id);
+        this.songId.push(i.mainSong.id);
+        this.$store.commit("count/radioIdList", this.songId);
+        console.log(this.$store.state.count.radioId);
+      });
+    },
+    async hotprogram(id) {
+      const result = await reqDetail({ rid: id });
+      // console.log(result.data.programs);
+      this.mainSongList = result.data.programs;
+      this.songId = [];
+      this.mainSongList.forEach((i) => {
+        // console.log(i.mainSong.id);
+        this.songId.push(i.mainSong.id);
+        this.$store.commit("count/radioIdList", this.songId);
+        console.log(this.$store.state.count.radioId);
+      });
+    },
+    hoursProgram() {
+      this.songId = [];
+      this.programList.forEach((i) => {
+        // console.log(i.program.mainSong.id);
+        this.songId.push(i.program.mainSong.id);
+        this.$store.commit("count/radioIdList", this.songId);
+        console.log(this.$store.state.count.radioId);
+      });
+    },
   },
   created() {
     this.recommend();
@@ -154,12 +188,12 @@ export default {
 .van-grid {
   flex-wrap: nowrap;
 }
-h3{
+h3 {
   font-size: 20px;
   color: #2c0812;
   padding: 15px 10px 10px;
 }
-h3 .van-icon{
+h3 .van-icon {
   font-size: 15px;
 }
 .box1 {
