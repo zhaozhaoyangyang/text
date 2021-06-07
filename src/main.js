@@ -6,6 +6,8 @@ import axios from "axios";
 import router from "./router";
 import { Icon } from "vant";
 import "vant/lib/index.css";
+import store from "./store";
+
 Vue.use(Vant);
 Vue.use(Icon);
 
@@ -17,4 +19,5 @@ new Vue({
   Vuex,
   axios,
   router,
+  store,
 }).$mount("#app");
