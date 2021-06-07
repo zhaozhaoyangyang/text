@@ -16,6 +16,7 @@
         label="验证码"
         placeholder="验证码"
         :rules="[{ required: true, message: '验证码' }]"
+        style="width:55%"
       />
       <van-field
         v-model="password"
@@ -41,9 +42,10 @@
           type="info"
           native-type="submit"
           color="#fa1951"
-          style="margin-top:10px; width:40%;margin-left:103px"
+          style="margin-top:130px; width:40%;margin-left:103px"
           >注册</van-button
         >
+        <h6>注册代表用户哈哈<a>《用户协议》</a></h6>
       </div>
     </van-form>
   </div>
@@ -94,9 +96,9 @@ export default {
 .reg {
   width: 100%;
   height: 667px;
-  background: url(../../assets/1.jpg) no-repeat;
+  background: url(../../assets/3.jpg) no-repeat;
   z-index: 1;
-  opacity: .9;
+  opacity: 0.9;
   position: relative;
 }
 .van-cell {
@@ -105,19 +107,30 @@ export default {
   width: 80%;
   left: 35px;
   border-radius: 20px;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
   align-content: center;
   justify-content: center;
   /* background-color: #222; */
 }
 
 .reg p {
-  /* width: 40px; */
-  /*  height: 40px;
-  line-height: 40px; */
+  width: 90px;
+  height: 40px;
+  line-height: 40px;
   color: #fff;
   text-align: center;
-  /* background: cornflowerblue; */
-  margin-top: 170px;
+  margin-left: 230px;
+  background: #fa1951;
+  border-radius: 20px;
+}
+h6 {
+  height: 20px;
+  color: gainsboro;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+}
+a {
+  color: #fa1951;
 }
 </style>
